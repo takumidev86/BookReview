@@ -1,0 +1,39 @@
+<%= form_for(book, url: books_path) do |f| %>
+  <% if book.errors.any? %>
+	<h2>
+	  <%= book.errors.count %> errors prohibited this obj from being saved:
+	</h2>
+	<ul>
+	  <% book.errors.full_messages.each do |message| %>
+	    <li><%= message %></li>
+	  <% end %>
+	</ul>
+  <% end %>
+<% end %>
+<div class="row">
+	<div class="user-info col-xs-3">
+		<h2>User info</h2>
+		<%= attachment_image_tag user, :profile_image, :fill, 60,60, format: 'jpeg', fallback: "no_image.jpg" %>
+		<table class="table">
+			<tr>
+				<td><b>name</b></td>
+				<td><b><%= user.name %></b></td>
+			</tr>
+			<tr>
+				<td><b>introduction</b></td>
+				<td><b><%= user.introduction %></b></td>
+			</tr>
+		</table>
+		<div class="row">
+			  <%= link_to "", edit_user_path(user.id), class: "btn btn-default glyphicon glyphicon-wrench col-xs-12" %>
+		</div>
+		<h2>New book</h2>
+		<%= form_for(book, url: books_path) do |f| %>
+			<div>
+				<label>Title</label>
+				<%= f.text_field :title %>
+				<label>Opinion</label>
+				<%= f.text_area :body %>
+				<%= f.submit "Create Book", class: "btn btn-primary col-xs-12" %>
+			</div>
+		<% end %>
