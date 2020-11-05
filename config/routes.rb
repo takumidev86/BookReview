@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'home/about' => 'books#about', as: 'home_about'
 
   resources :books, expect: [:new] do
+    resources :book_comments, only: [:create, :destroy]
      resource :favorites, only:[:create,:destroy]
   end
   patch 'books' => 'books#create'
