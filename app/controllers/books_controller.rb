@@ -1,4 +1,7 @@
 class BooksController < ApplicationController
+    before_action :authenticate_user!
+    before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+    
 	def top
 		
 	end
@@ -30,7 +33,10 @@ class BooksController < ApplicationController
 
 	def show
 		@book = Book.find(params[:id])
-		@user = @book.user
+        @user = @book.user
+        @book_comment = BookComment.new
+        @book_comments = @book.book_comments
+        
 	end
 
 	def destroy
