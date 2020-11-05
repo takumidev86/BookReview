@@ -8,7 +8,9 @@ Rails.application.routes.draw do
 #   get 'about' => 'books#about', as: 'home_about'
   get 'home/about' => 'books#about', as: 'home_about'
 
-  resources :books, expect: [:new]
+  resources :books, expect: [:new] do
+     resource :favorites, only:[:create,:destroy]
+  end
   patch 'books' => 'books#create'
   resources :users, only: [:show, :edit, :update, :index]
 
